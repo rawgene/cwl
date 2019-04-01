@@ -1,0 +1,7 @@
+fasta:
+  class: File
+  path: ./test.fa
+output: "transcript_index"
+# options are "fmd" or "quasi"
+index_type: "quasi"
+threads: "4"

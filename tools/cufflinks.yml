@@ -1,0 +1,14 @@
+gtf:
+  class: File
+  path: ./Homo_sapiens.GRCh38.95.gtf
+output: "./"
+threads: "12"
+#BiasCorrecting:
+#  class: File
+#  path: ./Homo_sapiens.GRCh38.dna.toplevel.fa
+#libtype: "ff-firststrand" 
+#libNorm: "classic-fpkm"
+#multi_read_correction: ""
+bam:
+  class: File
+  path: ./tumour1.bam

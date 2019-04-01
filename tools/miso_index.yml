@@ -1,0 +1,7 @@
+gtf:
+  class: File
+  path: ../../Homo_sapiens.GRCh38.95.gtf
+output: "tmp_from_cwl.gff"
+perl_input:
+  class: File
+  path: ../../../../../home18/fmj18/Documents/RNASeq/scripts/gtf2gff3.pl 

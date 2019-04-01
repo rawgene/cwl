@@ -1,0 +1,84 @@
+# A collection of RNA-Seq data analysis tools wrapped in CWL scripts
+# Copyright (C) 2019 Alessandro Pio Greco, Patrick Hedley-Miller, Filipe Jesus, Zeyu Yang
+# 
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+# 
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+# 
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
+# Rscript ballgown.R --data_dir PATH --metadata PATH --condition STRING
+
+library("matrixStats")
+library("ballgown")
+
+set.seed(1)
+
+args <- commandArgs(trailingOnly = TRUE)
+
+if( "--data_dir" %in% args){
+  data_dir.idx <- grep("--data_dir", args)
+  data_dir <- args[ data_dir.idx + 1 ]
+} else {
+  stop("please provide the path of the tablemaker output with prefix '--data_dir' \n")
+}
+
+if( "--metadata" %in% args ){
+  metadata.idx <- grep("--metadata", args)
+  metadata.path <- args[ metadata.idx + 1 ]
+  if(file.exists(metadata.path)){
+    metadata <- read.csv(metadata.path, header = TRUE)
+  } else {
+    stop("file <", metadata.path, "> not found. \n")
+  }
+} else {
+  stop("please provide a metadata csv \n")
+}
+
+if( "--condition" %in% args ){
+  condition.idx <- grep("--condition", args)
+  condition <- args[ condition.idx + 1 ]
+  if(!condition %in% colnames(metadata)){
+    stop("condition given '", condition, "' not found in the metadata")
+  }
+} else {
+  stop("please provide a valid condition with prefix '--conditions'")
+}
+
+comb <- combn(unique(as.character(metadata[,"condition"])), 2)
+for(i in 1:ncol(comb)){
+  metadata.f <- metadata[metadata$condition %in% comb[,i],]
+  metadata.f <- droplevels(metadata.f)
+  sample_full_path <- paste(data_dir, metadata.f[,1], sep = "/")
+  print("step1")
+  print(as.vector(sample_full_path))
+  print(metadata.f)
+  bg <- ballgown(samples = as.vector(sample_full_path), pData = metadata.f)
+  print("step2")
+  # Filter out transcripts with low variance
+  bg_filt <- subset (bg,"rowVars(texpr(bg)) > 1", genomesubset=TRUE)
+  
+  # Perform DE
+  results_transcripts <- stattest(bg_filt, feature="transcript", covariate=condition, getFC=TRUE, meas="FPKM")
+  results_transcripts$fc <- log2(results_transcripts$fc)
+  colnames(results_transcripts) <- c("feature", "name", "log2foldchange", "p_value","p_adj")
+  results_transcripts <- results_transcripts[,c("name", "feature", "log2foldchange", "p_value","p_adj")]
+  results_genes <- stattest(bg_filt, feature="gene", covariate=condition, getFC=TRUE, meas="FPKM")
+  results_genes$fc <- log2(results_genes$fc)
+  colnames(results_genes) <- c("feature", "name", "log2foldchange", "p_value","p_adj")
+  results_genes <- results_genes[,c("name", "feature", "log2foldchange", "p_value","p_adj")]
+  contrast <- gsub(".$","",paste0(paste0(unique(metadata.f$condition)),sep="-", collapse = ""))
+  write.csv(results_transcripts,paste0(contrast,"_","DTE_res.csv"), row.names = FALSE)
+  write.csv(results_genes,paste0(contrast,"_","DGE_res.csv"), row.names = FALSE)
+  
+  norm_count <- gexpr(bg)
+  norm_count <- data.frame("name"=rownames(norm_count), norm_count)
+  write.csv(norm_count,paste0(contrast,"_norm_count.csv"), row.names = FALSE)
+}

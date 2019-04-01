@@ -1,0 +1,8 @@
+bam:
+  class: File
+  path: ./test1.bam
+threads: 2
+gtf:
+  class: File
+  path: ./test.gtf
+output: test1.stringtie.gtf
