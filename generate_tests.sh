@@ -49,7 +49,7 @@ tail -n +5 ./tests/test1.star.sam > ./tests/test1.star.tail.sam
 
 
 ############################# TEST 2 ###################################
-
+echo STAR test2
 # Delete existing readmap files
 if [ -d "./test2" ]; then
     rm -rf ./test2
@@ -67,7 +67,7 @@ rm -rf test2
 tail -n +5 ./tests/test2.star.sam > ./tests/test2.star.tail.sam
 
 ############################# TEST 3 ###################################
-
+echo STAR test3
 # Delete existing readmap files
 if [ -d "./test3" ]; then
     rm -rf ./test3
@@ -85,7 +85,7 @@ rm -rf test3
 tail -n +5 ./tests/test3.star.sam > ./tests/test3.star.tail.sam
 
 ############################# TEST 4 ###################################
-
+echo STAR test4
 # Delete existing readmap files
 if [ -d "./test4" ]; then
     rm ./test4
@@ -105,7 +105,7 @@ tail -n +5 ./tests/test4.star.sam > ./tests/test4.star.tail.sam
 ########################################################################
 ##########################  STAR SAMTOOLS ##############################
 ########################################################################
-
+echo samtools
 ################################ TEST 1 ################################
 samtools sort -o ./tests/test1.star.bam ./tests/test1.star.sam
 
@@ -121,7 +121,7 @@ samtools sort -o ./tests/test4.star.bam ./tests/test4.star.sam
 ########################################################################
 ##############################  STAR STRINGTIE #########################
 ########################################################################
-
+echo stringtie
 # Delete existing stringtie directory
 if [ -d "./tests/star_stringtie" ]; then
     rm -r ./tests/star_stringtie
@@ -149,7 +149,7 @@ rm ./tests/star_stringtie/test*/*.ctab
 ########################################################################
 ########################  STAR STRINGTIE PREPDE  #######################
 ########################################################################
-
+echo prepde
 # run PrepDE python script
 python2.7 ./scripts/prepDE.py -i tests/star_stringtie/
 
@@ -160,7 +160,7 @@ rm ./transcript_count_matrix.csv
 ########################################################################
 ########################  STAR STRINGTIE DESEQ2  #######################
 ########################################################################
-
+echo deseq2
 # run deseq2 R script
 Rscript ./tests/DESeq2.R --count_matrix ./tests/gene_count_matrix.star_prepde.csv --metadata ./tests/metadata.csv --condition condition
 
@@ -171,7 +171,7 @@ rm -r ./untreated-treated_norm_count.csv
 ########################################################################
 ####################  STAR STRINGTIE DESEQ2 FGSEA  #####################
 ########################################################################
-
+echo fgsea
 # test for fgsea
 Rscript ./tests/GSEA_Script.R --de_res ./tests/DGE_res.star_prepde.csv --gene_set ./tests/reactome.tsv
 mv gsea_res.csv ./tests/gsea_res.star_prepde_deseq2.csv 
@@ -179,14 +179,14 @@ mv gsea_res.csv ./tests/gsea_res.star_prepde_deseq2.csv
 ########################################################################
 ##############################  HTSEQ PREPARE ##########################
 ########################################################################
-
+echo htseq_prepare
 # test for htseq prepare
 python2.7 ./scripts/Basic_DEXSeq_scripts/dexseq_prepare.py ./tests/test.gtf ./tests/test.htseq.gff
 
 ########################################################################
 ###############################  STAR HTSEQ  ###########################
 ########################################################################
-
+echo htseq_count
 # Delete existing stringtie directory
 if [ -d "./tests/star_dexseq" ]; then
     rm -r ./tests/star_dexseq
@@ -210,7 +210,7 @@ python2.7 ./scripts/Basic_DEXSeq_scripts/dexseq_count_modified.py -p no -s no -f
 ########################################################################
 ###########################  STAR HTSEQ DEXSEQ  ########################
 ########################################################################
-
+echo dexseq
 # run dexseq R script
 Rscript ./tests/DEXSeq.R --count_matrix_dir ./tests/star_dexseq --metadata ./tests/metadata.csv --condition condition
 
@@ -221,12 +221,13 @@ rm untreated-treated_norm_count.csv
 ########################################################################
 ##############################  MISO INDEX  ############################
 ########################################################################
-perl scripts/gtf2gff3.pl tests/test.gtf | tee tests/test.star_miso.gff
+echo miso index
+perl scripts/gtf2gff3.pl tests/test.gtf > tests/test.star_miso.gff
 
 ########################################################################
 ###########################  STAR MISO MERGE  ##########################
 ########################################################################
-
+echo miso merge
 # merge untreated bam
 samtools merge -f ./tests/test_untreated.star_miso.bam ./tests/test1.star.bam ./tests/test2.star.bam
 
@@ -236,7 +237,7 @@ samtools merge -f ./tests/test_treated.star_miso.bam ./tests/test3.star.bam ./te
 ########################################################################
 ############################  STAR MISO RUN  ###########################
 ########################################################################
-
+echo miso run
 # Delete existing stringtie directory
 if [ -d "./tests/miso_settings.txt" ]; then
     rm -r ./tests/miso_settings.txt
@@ -247,7 +248,20 @@ if [ -d "./tests/MISOindex" ]; then
     rm -r ./tests/MISOindex
 fi
 
-touch tests/miso_settings.txt && echo "[data]" >> tests/miso_settings.txt && echo "filter_results = False" >> tests/miso_settings.txt && echo "min_event_reads = 20" >> tests/miso_settings.txt && echo "strand = fr-unstranded" >> tests/miso_settings.txt && echo "" >> tests/miso_settings.txt && echo "[cluster]" >> tests/miso_settings.txt && echo "cluster_command = qsub" >> tests/miso_settings.txt && echo "" >> tests/miso_settings.txt && echo "[sampler]" >> tests/miso_settings.txt && echo "burn_in = 500" >> tests/miso_settings.txt && echo "lag = 10" >> tests/miso_settings.txt && echo "num_iters = 5000" >> tests/miso_settings.txt && echo "num_processors = 4" >> tests/miso_settings.txt
+touch tests/miso_settings.txt
+echo "[data]" >> tests/miso_settings.txt
+echo "filter_results = False" >> tests/miso_settings.txt
+echo "min_event_reads = 20" >> tests/miso_settings.txt
+echo "strand = fr-unstranded" >> tests/miso_settings.txt
+echo "" >> tests/miso_settings.txt
+echo "[cluster]" >> tests/miso_settings.txt
+echo "cluster_command = qsub" >> tests/miso_settings.txt
+echo "" >> tests/miso_settings.txt
+echo "[sampler]" >> tests/miso_settings.txt
+echo "burn_in = 500" >> tests/miso_settings.txt
+echo "lag = 10" >> tests/miso_settings.txt
+echo "num_iters = 5000" >> tests/miso_settings.txt
+echo "num_processors = 4" >> tests/miso_settings.txt
 
 
 # gtf indexing
@@ -286,7 +300,7 @@ summarize_miso --summarize ./tests/treated_miso/ ./tests/treated_miso/summary
 ########################################################################
 ##########################  STAR MISO COMPARE  #########################
 ########################################################################
-
+echo miso compare
 # run miso compare
 compare_miso --compare ./tests/untreated_miso/ ./tests/treated_miso/ ./tests/compare_miso
 
@@ -297,7 +311,7 @@ rm -rf ./tests/compare_miso
 ########################################################################
 ############################  STAR FEATURECOUNTS  ######################
 ########################################################################
-
+echo featurecount
 # Delete existing stringtie directory
 if [ -d "./featurecount" ]; then
     rm -r ./featurecount
@@ -322,7 +336,7 @@ rm -rf featurecount
 ########################################################################
 ######################  STAR FEATURECOUNTS EDGER  ######################
 ########################################################################
-
+echo edger
 # run edger
 Rscript ./tests/EdgeR.R --condition condition --counts ./tests/gene_count_matrix.star_featurecounts.csv --metadata ./tests/metadata.csv
 
@@ -333,7 +347,7 @@ rm untreated-treated_norm_count.csv
 ########################################################################
 #############################  SALMON INDEX  ###########################
 ########################################################################
-
+echo salmon index
 # Delete existing stringtie directory
 if [ -d "./tests/Salmonindex" ]; then
     rm -r ./tests/Salmonindex
@@ -347,7 +361,7 @@ docker stop $CONTAINER_ID
 ########################################################################
 #############################  SALMON QUANT  ######################
 ########################################################################
-
+echo salmon quant
 # Delete existing stringtie directory
 if [ -d "./tests/salmon_quant" ]; then
     rm -r ./tests/salmon_quant
@@ -383,7 +397,7 @@ docker stop $CONTAINER_ID
 ########################################################################
 #############################  SALMON COUNT  #######################
 ########################################################################
-
+echo salmon count
 # run salmon count
 Rscript ./scripts/salmon_R_script.R --gtf ./tests/test.gtf --metadata ./tests/metadata.csv --salmon_dir ./tests/salmon_quant
 
@@ -394,7 +408,7 @@ rm -rf gene_abundance_matrix.csv gene_length_matrix.csv
 ########################################################################
 ############################  SALMON DESEQ2  #######################
 ########################################################################
-
+echo salmon deseq2
 # run deseq2
 Rscript ./tests/DESeq2.R --count_matrix ./tests/salmon_gene_count.csv --metadata ./tests/metadata.csv
 
@@ -405,6 +419,7 @@ rm untreated-treated_norm_count.csv
 ########################################################################
 ############################## HISAT2 INDEX  ###########################
 ########################################################################
+echo hisat2 index
 if [ -d "./tests/HISAT2Index" ]; then
     rm -r ./tests/HISAT2Index
 fi
@@ -415,7 +430,7 @@ docker stop $CONTAINER_ID
 ########################################################################
 ############################## HISAT2 ALIGN  ###########################
 ########################################################################
-
+echo hisat2 align
 ################################ TEST 1 ################################
 docker run -v $PWD/tests:/tests -t quay.io/biocontainers/hisat2:2.1.0--py27h2d50403_2 hisat2 -q -x /tests/HISAT2Index/test -1 /tests/test1.1.fastq -2 /tests/test1.2.fastq --dta-cufflinks -p 1 -S /test1.hisat2.sam
 CONTAINER_ID=$(docker ps -alq)
@@ -445,7 +460,7 @@ docker stop $CONTAINER_ID
 ########################################################################
 ########################  HISAT2 SAMTOOLS ##############################
 ########################################################################
-
+echo hisat2 samtools
 ################################ TEST 1 ################################
 samtools sort -o ./tests/test1.hisat2.bam ./tests/test1.hisat2.sam
 
@@ -461,7 +476,7 @@ samtools sort -o ./tests/test4.hisat2.bam ./tests/test4.hisat2.sam
 ########################################################################
 ########################## HISAT2 CUFFLINKS  ###########################
 ########################################################################
-
+echo hisat2 cufflinks
 # Delete existing stringtie directory
 if [ -d "./tests/hisat2_cufflinks" ]; then
     rm -r ./tests/hisat2_cufflinks
@@ -496,7 +511,7 @@ docker stop $CONTAINER_ID
 ########################################################################
 ########################## HISAT2 CUFFMERGE  ###########################
 ########################################################################
-
+echo hisat2 cuffmerge
 # arrange first
 rm ./tests/assembly_GTF_list.txt
 touch ./tests/assembly_GTF_list.txt && echo "/tests/hisat2_cufflinks/test1_cufflinks/transcripts.gtf" >> ./tests/assembly_GTF_list.txt && echo "/tests/hisat2_cufflinks/test2_cufflinks/transcripts.gtf" >> ./tests/assembly_GTF_list.txt && echo "/tests/hisat2_cufflinks/test3_cufflinks/transcripts.gtf" >> ./tests/assembly_GTF_list.txt && echo "/tests/hisat2_cufflinks/test4_cufflinks/transcripts.gtf" >> ./tests/assembly_GTF_list.txt
@@ -513,7 +528,7 @@ docker stop $CONTAINER_ID
 ########################################################################
 ########################## HISAT2 CUFFQUANT  ###########################
 ########################################################################
-
+echo hisat2 cuffquant
 # Delete existing stringtie directory
 if [ -d "./tests/hisat2_cuffquant" ]; then
     rm -r ./tests/hisat2_cuffquant
@@ -549,7 +564,7 @@ docker stop $CONTAINER_ID
 ########################################################################
 ########################### HISAT2 CUFFDIFF  ###########################
 ########################################################################
-
+echo hisat2 cuffdiff
 # run cuffdiff
 docker run -v $PWD/tests:/tests -t filipejesus/cufflinks:latest cuffdiff -p 1 -L untreated,treated -o /cuffdiff_out --FDR 1 ./tests/merged.gtf ./tests/hisat2_cuffquant/test1/abundances.cxb,./tests/hisat2_cuffquant/test2/abundances.cxb ./tests/hisat2_cuffquant/test3/abundances.cxb,./tests/hisat2_cuffquant/test4/abundances.cxb
 CONTAINER_ID=$(docker ps -alq)
@@ -566,7 +581,7 @@ rm -rf ./cuffdiff_out
 ########################################################################
 ########################## HISAT2 TABLEMAKER  ##########################
 ########################################################################
-
+echo hisat2 tablemaker
 # Delete existing stringtie directory
 if [ -d "./tests/hisat2_tablemaker" ]; then
     rm -r ./tests/hisat2_tablemaker
@@ -603,7 +618,7 @@ docker stop $CONTAINER_ID
 ########################################################################
 ########################### HISAT2 BALLGOWN  ###########################
 ########################################################################
-
+echo hisat2 ballgown
 docker run -v $PWD:/tests -t quay.io/biocontainers/bioconductor-ballgown:2.14.0--r351_0 Rscript /tests/tests/ballgown.R --data_dir /tests/tests/hisat2_tablemaker --metadata /tests/tests/metadata.csv --condition condition
 CONTAINER_ID=$(docker ps -alq)
 docker cp $CONTAINER_ID:/untreated-treated_DGE_res.csv .
@@ -614,7 +629,7 @@ mv untreated-treated_DGE_res.csv ./tests/DGE_res.hisat2_ballgown.csv
 ########################################################################
 #############################  HISAT2 STRINGTIE ########################
 ########################################################################
-
+echo hisat2 stringtie
 # Delete existing stringtie directory
 if [ -d "./tests/hisat2_stringtie" ]; then
     rm -r ./tests/hisat2_stringtie
@@ -641,7 +656,7 @@ rm ./tests/hisat2_stringtie/test*/*.ctab
 ########################################################################
 #######################  HISAT2 STRINGTIE PREPDE  ######################
 ########################################################################
-
+echo hisat2 stringtie prepde
 # run PrepDE python script
 python2.7 ./scripts/prepDE.py -i tests/hisat2_stringtie/
 
@@ -652,7 +667,7 @@ rm ./transcript_count_matrix.csv
 ########################################################################
 #######################  HISAT2 STRINGTIE DESEQ2  ######################
 ########################################################################
-
+echo hisat2 stringtie deseq2
 # run deseq2 R script
 Rscript ./tests/DESeq2.R --count_matrix ./tests/gene_count_matrix.hisat2_prepde.csv --metadata ./tests/metadata.csv --condition condition
 
@@ -663,7 +678,7 @@ rm -r ./untreated-treated_norm_count.csv
 ########################################################################
 ##############################  HISAT2 HTSEQ  ##########################
 ########################################################################
-
+echo hisat2 htseq
 # Delete existing stringtie directory
 if [ -d "./tests/hisat2_dexseq" ]; then
     rm -r ./tests/hisat2_dexseq
@@ -687,7 +702,7 @@ python2.7 ./scripts/Basic_DEXSeq_scripts/dexseq_count_modified.py -p no -s no -f
 ########################################################################
 ##########################  HISAT2 HTSEQ DEXSEQ  #######################
 ########################################################################
-
+echo hisat2 htseq dexseq
 # run dexseq R script
 Rscript ./tests/DEXSeq.R --count_matrix_dir ./tests/hisat2_dexseq --metadata ./tests/metadata.csv --condition condition
 
