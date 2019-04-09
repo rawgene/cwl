@@ -1,6 +1,6 @@
 fasta:
-  - {class: File, path: ../tests/test.fa}
+  - {class: File, path: ../tests/test.cnda.fa}
 output: "Salmonindex"
 # options are "fmd" or "quasi"
 index_type: "quasi"
-threads: 4
+threads: 2
