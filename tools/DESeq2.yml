@@ -1,10 +1,10 @@
 input_script:
   class: File
-  path: ../../scripts/Basic_DESeq2.R
+  # use truncated version of DESeq2, use ../scripts/DESeq2.R for production
+  path: ../tests/DESeq2.R
 count_matrix:
   class: File
-  path: ../../tests/gene_count_matrix.csv
+  path: ../tests/gene_count_matrix.star_prepde.csv
 metadata:
   class: File
-  path: ../../tests/metadata.csv
-threads: 2
+  path: ../tests/metadata.csv

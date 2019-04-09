@@ -61,7 +61,7 @@ steps:
       output: ht2base
     out: [ht, log]
   hisat2_build_folder:
-    run: ../../cwl-tools/folder.cwl
+    run: ../tools/folder.cwl
     in:
       item: hisat2_build/ht
       name:

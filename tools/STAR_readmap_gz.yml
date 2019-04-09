@@ -1,0 +1,12 @@
+threads: 2
+Mode: "alignReads"
+genomeDir:
+  class: Directory
+  path: ../tests/STARIndex
+sjdbGTFfile:
+  class: File
+  path: ../tests/test.gtf
+readFilesIn:
+  - {class: File, path: ../tests/test1.1.fastq.gz}
+  - {class: File, path: ../tests/test1.2.fastq.gz}
+outFileNamePrefix: "test1gz"

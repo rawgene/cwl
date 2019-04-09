@@ -1,8 +1,6 @@
-threads: 12
+threads: 1
 fasta:
-  class: File
-  path: path
+  - {class: File, path: ../tests/test.fa}
 gtf:
-  class: File
-  path: path
-ht2base: H.Sapiens
+  - {class: File, path: ../tests/test.gtf}
+ht2base: test
