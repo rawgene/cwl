@@ -6,7 +6,7 @@ def test_salmon_index_docker():
 					"--outdir=./test_salmon_index",
 					"./tools/salmon_index.cwl",
 					"./tools/salmon_index.yml"])
-	assert filecmp.cmp("./tests/SALMONIndex/sa.bin",
+	assert filecmp.cmp("./tests/Salmonndex/sa.bin",
 						"./test_salmon_index/Salmonindex/sa.bin")
 
 if __name__ == "__main__":

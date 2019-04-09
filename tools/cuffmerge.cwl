@@ -32,13 +32,12 @@ arguments:
   - position: -3
     prefix: -c
     valueFrom: |
-    import json
-    with open("inputs.json") as file:
-      inputs = json.load(file)
-    with open("assembly_GTF_list.txt", "w") as txt:
-      for i in range(len(inputs["inputs"])):
-        txt.write(inputs["inputs"][i]["path"]
-          + "\n")
+      import json
+      with open("inputs.json") as file:
+        inputs = json.load(file)
+      with open("assembly_GTF_list.txt", "w") as txt:
+        for i in range(len(inputs["inputs"])):
+          txt.write(inputs["inputs"][i]["path"] + "\n")
   - prefix: "&&"
     position: -2
     shellQuote: False

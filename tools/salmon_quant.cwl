@@ -48,12 +48,12 @@ inputs:
       position: 3
       prefix: "-p"
   first_end_fastq:
-    type: File?
+    type: File[]?
     inputBinding:
       position: 5
       prefix: "-1"
   second_end_fastq:
-    type: File?
+    type: File[]?
     inputBinding:
       position: 6
       prefix: "-2"

@@ -1,7 +1,7 @@
 threads: 2
 salmon_index:
   class: Directory
-  path: ../tests/SALMONIndex
+  path: ../tests/Salmonindex
 subject_name1: test1
 subject_name2: test2
 subject_name3: test3

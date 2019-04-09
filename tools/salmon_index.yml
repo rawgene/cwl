@@ -3,4 +3,4 @@ fasta:
 output: "transcript_index"
 # options are "fmd" or "quasi"
 index_type: "quasi"
-threads: "4"
+threads: 4

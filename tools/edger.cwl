@@ -49,8 +49,8 @@ outputs:
   edger_out:
     type: File[]
     outputBinding:
-    glob: "*.csv"
+      glob: "*.csv"
   de_res:
     type: File[]
     outputBinding:
-    glob: "*DGE_res.csv"
+      glob: "*DGE_res.csv"
