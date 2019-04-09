@@ -1,6 +1,6 @@
 fasta:
-  - {class: File, path: ./test.fa}
-output: "transcript_index"
+  - {class: File, path: ../tests/test.fa}
+output: "Salmonindex"
 # options are "fmd" or "quasi"
 index_type: "quasi"
 threads: 4
