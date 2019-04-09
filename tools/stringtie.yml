@@ -1,8 +1,8 @@
 bam:
   class: File
-  path: ./test1.bam
+  path: ../tests/test1.star.bam
 threads: 2
 gtf:
   class: File
-  path: ./test.gtf
-output: test1.stringtie.gtf
+  path: ../tests/test.gtf
+output: test1.stringtie

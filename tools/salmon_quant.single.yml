@@ -1,8 +1,8 @@
 index_directory:
   class: Directory
-  path: ./transcript_index
-output: test3_quant
-threads: 4
+  path: ../tests/SALMONIndex
+output: test3
+threads: 2
 #first_end_fastq:
 #  class: File
 #  path: test1.1.fastq
@@ -10,5 +10,4 @@ threads: 4
 #  class: File
 #  path: test1.2.fastq
 single_fastq:
-  class: File
-  path: test3.fastq
+  - {class: File, path: ../tests/test3.fastq}

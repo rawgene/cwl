@@ -1,9 +1,10 @@
 input_script:
-  class: File
-  path: ./DEXSeq.R
+   class: File
+   path: ../tests/DEXSeq.R # testing script, use ../scripts for production
 counts_matrix:
-  class: Directory
-  path: ./
+   class: Directory
+   path: ../tests/hisat2_dexseq
 metadata:
-  class: File
-  path: ./metadata.csv
+   class: File
+   path: ../tests/metadata.csv
+threads: 2

@@ -1,7 +1,13 @@
-threads: 2
-salmon_index:
+threads: 1
+genomeDir:
   class: Directory
-  path: ../tests/SALMONIndex
+  path: ../tests/HISAT2Index
+annotation:
+  class: File
+  path: ../tests/test.gtf
+fasta:
+  class: File
+  path: ../tests/test.fa
 subject_name1: test1
 subject_name2: test2
 subject_name3: test3
@@ -16,15 +22,17 @@ fastq3:
   - {class: File, path: ../tests/test3.fastq}
 fastq4:
   - {class: File, path: ../tests/test4.fastq}
-annotation:
+ballgown_script:
   class: File
-  path: ../tests/test.gtf
-salmon_count_script:
-  class: File
-  path: ../scripts/salmon_R_script.R
-DESeq2_script:
-  class: File
-  path: ../tests/DESeq2.R
+  path: ../tests/ballgown.R
 metadata:
   class: File
   path: ../tests/metadata.csv
+conditions: ["untreated","treated"]
+Tag: --dta-cufflinks
+python_script:
+  class: File
+  path: ../scripts/cuffdiff_file_sort.py
+norm_python_script:
+  class: File
+  path: ../scripts/cuffnorm_table.py

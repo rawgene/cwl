@@ -1,9 +1,8 @@
 input_script:
-  class: File
-  path: ./GSEA_Script.R
+   class: File
+   path: ../tests/GSEA_Script.R # testing script, use ../scripts for production
 de_res:
-  class: File
-  path: ./test_dge_results.csv
+   - {class: File, path: ../tests/DGE_res.hisat2_prepde.csv}
 gene_set:
-  class: File
-  path: ./reactome.tsv
+   class: File
+   path: ../tests/reactome.tsv

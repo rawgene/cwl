@@ -1,13 +1,11 @@
-threads: 2
+threads: 1 
 index_directory: 
-  class: Directory
-  path: ./path/to/index
+   class: Directory
+   path: ../tests/HISAT2Index
 first_pair:
-  class: File
-  path: test1.1.fastq
+   class: File
+   path: ../tests/test1.1.fastq
 second_pair:
-  class: File
-  path: test1.2.fastq
+   class: File
+   path: ../tests/test1.2.fastq
 output: "test1.sam"
-# dta for stringtie while dta-cufflinks for cufflinks
-XSTag: "--dta"
