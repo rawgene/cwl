@@ -98,7 +98,7 @@ steps:
     out: [salmon_out]
 
   salmon_quant_folder:
-    run: ../../cwl-tools/folder.cwl
+    run: ../tools/folder.cwl
     in:
       item:
       - salmon_quant_1/salmon_out
@@ -119,7 +119,7 @@ steps:
     out: [gene_count_output, gene_length_output, gene_abundance_output]
 
   salmon_count_folder:
-    run: ../../cwl-tools/folder.cwl
+    run: ../tools/folder.cwl
     in:
       item:
       - salmon_count/gene_count_output
@@ -138,7 +138,7 @@ steps:
     out: [DESeq2_out]
 
   DESeq2_folder:
-    run: ../../cwl-tools/folder.cwl
+    run: ../tools/folder.cwl
     in:
       item: DESeq2/DESeq2_out
       name:

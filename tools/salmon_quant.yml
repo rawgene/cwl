@@ -1,6 +1,6 @@
 index_directory:
   class: Directory
-  path: ../tests/SALMONIndex
+  path: ../tests/Salmonindex
 output: test2
 threads: 2
 first_end_fastq:

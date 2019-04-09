@@ -29,11 +29,11 @@ inputs:
     type: File
     inputBinding:
       position: 1
-   counts_matrix:
-    type: Directory
-    inputBinding:
-      position: 2
-      prefix: --count_matrix_dir
+    counts_matrix:
+      type: Directory
+      inputBinding:
+        position: 2
+        prefix: --count_matrix_dir
   metadata:
     type: File
     inputBinding:

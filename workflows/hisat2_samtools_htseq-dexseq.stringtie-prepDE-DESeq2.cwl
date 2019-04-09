@@ -137,7 +137,7 @@ steps:
     out: [sam_output, hisat2_align_out]
 
   hisat2_align_folder:
-    run: ../../cwl-tools/folder.cwl
+    run: ../tools/folder.cwl
     in:
       item:
       - hisat2_align_1/hisat2_align_out
@@ -190,7 +190,7 @@ steps:
     out: [samtools_out]
 
   samtools_folder:
-    run: ../../cwl-tools/folder.cwl
+    run: ../tools/folder.cwl
     in:
       item:
       - samtools_1/samtools_out
@@ -212,7 +212,7 @@ steps:
     out: [ht_prep_out]
 
   htseq_prepare_folder:
-    run: ../../cwl-tools/folder.cwl
+    run: ../tools/folder.cwl
     in:
       item: htseq_prepare/ht_prep_out
       name:
@@ -297,7 +297,7 @@ steps:
     out: [exon_count_output]
 
   htseq_count_folder:
-    run: ../../cwl-tools/folder.cwl
+    run: ../tools/folder.cwl
     in:
       item:
       - htseq_count_1/exon_count_output
@@ -318,7 +318,7 @@ steps:
     out: [dexseq_out]
 
   dexseq_folder:
-    run: ../../cwl-tools/folder.cwl
+    run: ../tools/folder.cwl
     in:
       item: dexseq/dexseq_out
       name:
@@ -371,7 +371,7 @@ steps:
     out: [stringtie_out]
 
   stringtie_folder:
-    run: ../../cwl-tools/folder.cwl
+    run: ../tools/folder.cwl
     in:
       item:
       - stringtie_1/stringtie_out
@@ -390,7 +390,7 @@ steps:
     out: [gene_count_output, transcript_count_output]
 
   prepDE_folder:
-    run: ../../cwl-tools/folder.cwl
+    run: ../tools/folder.cwl
     in:
       item:
       - prepDE/gene_count_output
@@ -408,7 +408,7 @@ steps:
     out: [DESeq2_out]
 
   DESeq2_folder:
-    run: ../../cwl-tools/folder.cwl
+    run: ../tools/folder.cwl
     in:
       item: DESeq2/DESeq2_out
       name:

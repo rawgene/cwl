@@ -91,7 +91,7 @@ steps:
     out: [sam_output, star_read_out]
 
   star_folder:
-    run: ../../cwl-tools/folder.cwl
+    run: ../tools/folder.cwl
     in:
       item:
       - star_readmap_1/star_read_out
@@ -145,7 +145,7 @@ steps:
     out: [samtools_out]
 
   samtools_folder:
-    run: ../../cwl-tools/folder.cwl
+    run: ../tools/folder.cwl
     in:
       item:
       - samtools_1/samtools_out
@@ -171,7 +171,7 @@ steps:
     out: [gene_count_output]
 
   featurecounts_folder:
-    run: ../../cwl-tools/folder.cwl
+    run: ../tools/folder.cwl
     in:
       item: featurecounts/gene_count_output
       name:
@@ -187,7 +187,7 @@ steps:
     out: [edger_out]
 
   edger_folder:
-    run: ../../cwl-tools/folder.cwl
+    run: ../tools/folder.cwl
     in:
       item: edger/edger_out
       name:

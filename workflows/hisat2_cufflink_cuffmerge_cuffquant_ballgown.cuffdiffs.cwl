@@ -142,7 +142,7 @@ steps:
     out: [sam_output, hisat2_align_out]
 
   hisat2_align_folder:
-    run: ../../cwl-tools/folder.cwl
+    run: ../tools/folder.cwl
     in:
       item:
       - hisat2_align_1/hisat2_align_out
@@ -195,7 +195,7 @@ steps:
     out: [samtools_out]
 
   samtools_folder:
-    run: ../../cwl-tools/folder.cwl
+    run: ../tools/folder.cwl
     in:
       item:
       - samtools_1/samtools_out
@@ -252,7 +252,7 @@ steps:
     out: [cufflink_out, gtf_out]
 
   cufflink_folder:
-    run: ../../cwl-tools/folder.cwl
+    run: ../tools/folder.cwl
     in:
       item:
         - cufflinks_1/cufflink_out
@@ -280,7 +280,7 @@ steps:
     out: [cuffmerge_out, merged_gtf]
 
   cuffmerge_folder:
-    run: ../../cwl-tools/folder.cwl
+    run: ../tools/folder.cwl
     in:
       item: cuffmerge/merged_gtf
       name:
@@ -332,7 +332,7 @@ steps:
     out: [cuffquant_out, cxb]
 
   cuffquant_folder:
-    run: ../../cwl-tools/folder.cwl
+    run: ../tools/folder.cwl
     in:
       item:
         - cuffquant_1/cuffquant_out
@@ -386,7 +386,7 @@ steps:
     out: [cuffnorm_out]
 
   cuffdiff_folder:
-    run: ../../cwl-tools/folder.cwl
+    run: ../tools/folder.cwl
     in:
       item:
         - cuffdiff/cuffdiff_out
@@ -439,7 +439,7 @@ steps:
     out: [tablemaker_out]
 
   tablemaker_folder:
-    run: ../../cwl-tools/folder.cwl
+    run: ../tools/folder.cwl
     in:
       item:
         - tablemaker_1/tablemaker_out
@@ -462,7 +462,7 @@ steps:
     out: [ballgown_out]
 
   ballgown_folder:
-    run: ../../cwl-tools/folder.cwl
+    run: ../tools/folder.cwl
     in:
       item:
         - ballgown/ballgown_out

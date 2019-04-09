@@ -91,7 +91,7 @@ steps:
     out: [sam_output, star_read_out]
 
   star_folder:
-    run: ../../cwl-tools/folder.cwl
+    run: ../tools/folder.cwl
     in:
       item:
       - star_readmap_1/star_read_out
@@ -144,7 +144,7 @@ steps:
     out: [samtools_out]
 
   samtools_folder:
-    run: ../../cwl-tools/folder.cwl
+    run: ../tools/folder.cwl
     in:
       item:
       - samtools_1/samtools_out
@@ -222,7 +222,7 @@ steps:
     out: [miso_out]
 
   miso_folder:
-    run: ../../cwl-tools/folder.cwl
+    run: ../tools/folder.cwl
     in:
       item:
       - miso_index/miso_out
