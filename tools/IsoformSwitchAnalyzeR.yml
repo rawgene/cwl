@@ -1,0 +1,12 @@
+input_script:
+  class: File
+  path: ../scripts/IsoformSwitchAnalyzeR_script.R
+metadata:
+  class: File
+  path: ../test/metadata.csv
+gtf:
+  class: File
+  path: ../test/text.gtf
+salmon_dir:
+  class: Directory
+  path: ../test/salmonquant
