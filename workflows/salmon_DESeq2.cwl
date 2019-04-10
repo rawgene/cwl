@@ -58,10 +58,10 @@ steps:
       output: subject_name1
       threads: threads
       first_end_fastq:
-        source: [fastq1]
+        source: fastq1
         valueFrom: $(self[0])
       second_end_fastq:
-        source: [fastq1]
+        source: fastq1
         valueFrom: $(self[1])
     out: [salmon_out]
 
@@ -72,10 +72,10 @@ steps:
       output: subject_name2
       threads: threads
       first_end_fastq:
-        source: [fastq2]
+        source: fastq2
         valueFrom: $(self[0])
       second_end_fastq:
-        source: [fastq2]
+        source: fastq2
         valueFrom: $(self[1])
     out: [salmon_out]
 
