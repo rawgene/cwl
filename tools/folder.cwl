@@ -22,7 +22,10 @@ requirements:
   InlineJavascriptRequirement: {}
 
 inputs:
-  item: Any
+  item: 
+    type:
+      - File
+      - Directory
   name: string
 
 outputs:
