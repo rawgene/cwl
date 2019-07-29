@@ -24,8 +24,8 @@ requirements:
 inputs:
   item: 
     type:
-      - File
-      - Directory
+      - [File]
+      - [Directory]
   name: string
 
 outputs:
