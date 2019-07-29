@@ -24,6 +24,8 @@ requirements:
 inputs:
   item: 
     type:
+      - File
+      - Directory
       - type: array
         items:
           - File
