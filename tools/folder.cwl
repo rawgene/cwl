@@ -24,8 +24,10 @@ requirements:
 inputs:
   item: 
     type:
-      - [File]
-      - [Directory]
+      - type: array
+        items:
+          - File
+          - Directory
   name: string
 
 outputs:
